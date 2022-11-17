@@ -4,11 +4,13 @@ const mongoose = require("mongoose");
 
 const app = express();
 
+app.use("/api/auth", require("./routes/auth.routes"));
+
 const PORT = config.get("port") || 5000;
 
 async function start() {
     try {
-        await mongoose.connect(config.get("mongoURL"), {
+        await mongoose.connect(config.get("mongoURI"), {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
