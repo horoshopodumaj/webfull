@@ -1,0 +1,28 @@
+{
+    "name": "webfull",
+    "version": "1.0.0",
+    "description": "user table",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js",
+        "server": "nodemon app.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/horoshopodumaj/webfull.git"
+    },
+    "author": "Diana M",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/horoshopodumaj/webfull/issues"
+    },
+    "homepage": "https://github.com/horoshopodumaj/webfull#readme",
+    "dependencies": {
+        "express": "^4.18.2",
+        "mongoose": "^6.7.2"
+    },
+    "devDependencies": {
+        "concurrently": "^7.5.0",
+        "nodemon": "^2.0.20"
+    }
+}
