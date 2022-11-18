@@ -3,13 +3,10 @@ import "materialize-css";
 import { UseRoutes } from "./routes";
 
 function App() {
-    const routes = UseRoutes(true);
+    const routes = UseRoutes(false);
     return (
         <BrowserRouter>
-            <div className="container">
-                <h1>HI!</h1>
-                {routes}
-            </div>
+            <div className="container">{routes}</div>
         </BrowserRouter>
     );
 }
