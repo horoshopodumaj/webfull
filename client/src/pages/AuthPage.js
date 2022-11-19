@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import moment from "moment";
 
@@ -16,6 +17,24 @@ const AuthPage = () => {
             [event.target.name]: event.target.value,
             loginDate: moment().format("LLL"),
         });
+    };
+
+    const loginHandler = async () => {
+        try {
+            await axios
+                .post(
+                    "/api/auth/login",
+                    { ...form },
+                    {
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                    }
+                )
+                .then((response) => console.log(response));
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     const preventDefault = (event) => {
@@ -57,7 +76,11 @@ const AuthPage = () => {
                             </div>
                         </div>
                         <div className="card-action">
-                            <button className="btn yellow lighten-4 black-text mr-10">Войти</button>
+                            <button
+                                onClick={loginHandler}
+                                className="btn yellow lighten-4 black-text mr-10">
+                                Войти
+                            </button>
                             <Link to="/registration" className="btn teal accent-2 black-text">
                                 Нет аккаунта?
                             </Link>

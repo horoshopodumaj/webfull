@@ -24,7 +24,7 @@ router.post(
                 });
             }
 
-            const { email, password, name, createDate } = req.body;
+            const { email, password, name, createDate, loginDate } = req.body;
             const candidate = await User.findOne({ email });
 
             if (candidate) {
@@ -32,7 +32,7 @@ router.post(
             }
 
             const hashedPassword = await bcrypt.hash(password, 12);
-            const user = new User({ email, password: hashedPassword, name, createDate });
+            const user = new User({ email, password: hashedPassword, name, createDate, loginDate });
 
             await user.save();
 
@@ -47,7 +47,7 @@ router.post(
 router.post(
     "/login",
     [
-        check("email", "Enter the correct email").normalizeEmail().isEmail(),
+        check("email", "Enter the correct email").isEmail(),
         check("password", "Enter the password").exists(),
     ],
     async (req, res) => {

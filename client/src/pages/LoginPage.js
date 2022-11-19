@@ -10,6 +10,7 @@ const LoginPage = () => {
         password: "",
         name: "",
         createDate: "",
+        loginDate: "",
     });
 
     const changeHandler = (event) => {
@@ -17,6 +18,7 @@ const LoginPage = () => {
             ...form,
             [event.target.name]: event.target.value,
             createDate: moment().format("LLL"),
+            loginDate: moment().format("LLL"),
         });
     };
 
