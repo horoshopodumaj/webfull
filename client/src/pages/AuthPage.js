@@ -1,22 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const AuthPage = () => {
+    const [form, setForm] = useState({
+        email: "",
+        password: "",
+    });
+
+    const changeHandler = (event) => {
+        setForm({ ...form, [event.target.name]: event.target.value });
+    };
+
+    const preventDefault = (event) => {
+        event.preventDefault();
+    };
+
     return (
         <div className="row">
             <div className="col s6 offset-s3">
                 <h1 className="txt-cnt">Таблица пользователей</h1>
                 <div className="card cyan lighten-5">
-                    <form>
+                    <form onSubmit={preventDefault}>
                         <div className="card-content black-text">
                             <span className="card-title ">Войти в аккаунт</span>
                             <div>
                                 <div className="input-field">
-                                    <input id="email" type="email" name="email" />
+                                    <input
+                                        onChange={changeHandler}
+                                        id="email"
+                                        type="email"
+                                        name="email"
+                                    />
                                     <label htmlFor="email">Email</label>
                                 </div>
                                 <div className="input-field">
-                                    <input id="password" type="password" name="password" />
+                                    <input
+                                        onChange={changeHandler}
+                                        id="password"
+                                        type="password"
+                                        name="password"
+                                    />
                                     <label htmlFor="password">Password</label>
                                 </div>
                             </div>
