@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const LoginPage = () => {
     return (
@@ -28,9 +29,9 @@ const LoginPage = () => {
                             <button className="btn yellow lighten-4 black-text mr-10">
                                 Зарегистрироваться
                             </button>
-                            <button className="btn teal accent-2 black-text">
+                            <Link to="/" className="btn teal accent-2 black-text">
                                 Уже есть аккаунт?
-                            </button>
+                            </Link>
                         </div>
                     </form>
                 </div>

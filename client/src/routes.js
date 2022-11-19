@@ -1,12 +1,14 @@
 import React from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import AuthPage from "./pages/AuthPage";
+import LoginPage from "./pages/LoginPage";
 import UsersPage from "./pages/UsersPage";
 
 export const UseRoutes = (isAuth) => {
     return (
         <Routes>
             <Route path="/" element={<AuthPage />} />
+            <Route path="/registration" element={<LoginPage />} />
             <Route path="/users" element={isAuth ? <UsersPage /> : <Navigate to="/" replace />} />
             <Route
                 path="*"

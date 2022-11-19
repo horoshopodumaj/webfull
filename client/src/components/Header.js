@@ -10,7 +10,7 @@ const Header = ({ isAuth }) => {
                 </Link>
                 <ul id="nav-mobile" className="right hide-on-med-and-down">
                     <li>
-                        <Link to="/login">{isAuth ? "Выйти" : "Войти"}</Link>
+                        <Link to="/">{isAuth ? "Выйти" : "Войти"}</Link>
                     </li>
                 </ul>
             </div>
