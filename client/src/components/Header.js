@@ -6,7 +6,7 @@ const Header = ({ isAuth }) => {
         <nav className="light-blue">
             <div className="nav-wrapper">
                 <Link to="" className="brand-logo ml-15">
-                    Logo
+                    TaskF
                 </Link>
                 <ul id="nav-mobile" className="right hide-on-med-and-down">
                     <li>

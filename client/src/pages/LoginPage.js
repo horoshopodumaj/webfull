@@ -1,6 +1,6 @@
 import React from "react";
 
-const AuthPage = () => {
+const LoginPage = () => {
     return (
         <div className="row">
             <div className="col s6 offset-s3">
@@ -8,8 +8,12 @@ const AuthPage = () => {
                 <div className="card cyan lighten-5">
                     <form>
                         <div className="card-content black-text">
-                            <span className="card-title ">Войти в аккаунт</span>
+                            <span className="card-title ">Создать аккаунт</span>
                             <div>
+                                <div className="input-field">
+                                    <input id="name" type="text" name="name" />
+                                    <label htmlFor="name">Name</label>
+                                </div>
                                 <div className="input-field">
                                     <input id="email" type="email" name="email" />
                                     <label htmlFor="email">Email</label>
@@ -21,8 +25,12 @@ const AuthPage = () => {
                             </div>
                         </div>
                         <div className="card-action">
-                            <button className="btn yellow lighten-4 black-text mr-10">Войти</button>
-                            <button className="btn teal accent-2 black-text">Нет аккаунта?</button>
+                            <button className="btn yellow lighten-4 black-text mr-10">
+                                Зарегистрироваться
+                            </button>
+                            <button className="btn teal accent-2 black-text">
+                                Уже есть аккаунт?
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -31,4 +39,4 @@ const AuthPage = () => {
     );
 };
 
-export default AuthPage;
+export default LoginPage;
