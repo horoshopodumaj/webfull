@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 
 const LoginPage = () => {
+    const [type, setType] = useState(true);
     const [form, setForm] = useState({
         email: "",
         password: "",
@@ -15,10 +16,8 @@ const LoginPage = () => {
         setForm({
             ...form,
             [event.target.name]: event.target.value,
-            createDate: moment().subtract(10, "days").calendar(),
+            createDate: moment().format("LLL"),
         });
-
-        console.log(form);
     };
 
     const registerHandler = async () => {
@@ -74,10 +73,16 @@ const LoginPage = () => {
                                     <input
                                         onChange={changeHandler}
                                         id="password"
-                                        type="password"
+                                        type={type ? "password" : "text"}
                                         name="password"
+                                        className="pass"
                                     />
                                     <label htmlFor="password">Password</label>
+                                    <i
+                                        onClick={() => setType(!type)}
+                                        className="icon material-icons">
+                                        {type ? "visibility" : "visibility_off"}
+                                    </i>
                                 </div>
                             </div>
                         </div>

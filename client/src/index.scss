@@ -18,3 +18,14 @@
 .txt-cnt {
     text-align: center;
 }
+
+.pass {
+    position: relative;
+}
+
+.icon {
+    position: absolute;
+    right: 0;
+    bottom: 33%;
+    cursor: pointer;
+}

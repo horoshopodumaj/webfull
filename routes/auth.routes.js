@@ -61,7 +61,7 @@ router.post(
                 });
             }
 
-            const { email, password } = req.body;
+            const { email, password, loginDate } = req.body;
 
             const user = await User.findOne({ email });
 
@@ -78,6 +78,8 @@ router.post(
             const token = jwt.sign({ userId: user.id }, config.get("jwtSecret"), {
                 expiresIn: "1h",
             });
+
+            await User.findOneAndUpdate({ email }, { loginDate });
 
             res.json({ token, userId: user.id });
         } catch (error) {

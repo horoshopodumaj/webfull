@@ -1,14 +1,21 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import moment from "moment";
 
 const AuthPage = () => {
+    const [type, setType] = useState(true);
     const [form, setForm] = useState({
         email: "",
         password: "",
+        loginDate: "",
     });
 
     const changeHandler = (event) => {
-        setForm({ ...form, [event.target.name]: event.target.value });
+        setForm({
+            ...form,
+            [event.target.name]: event.target.value,
+            loginDate: moment().format("LLL"),
+        });
     };
 
     const preventDefault = (event) => {
@@ -37,10 +44,15 @@ const AuthPage = () => {
                                     <input
                                         onChange={changeHandler}
                                         id="password"
-                                        type="password"
+                                        type={type ? "password" : "text"}
                                         name="password"
                                     />
                                     <label htmlFor="password">Password</label>
+                                    <i
+                                        onClick={() => setType(!type)}
+                                        className="icon material-icons">
+                                        {type ? "visibility" : "visibility_off"}
+                                    </i>
                                 </div>
                             </div>
                         </div>
