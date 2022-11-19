@@ -1,15 +1,16 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Header = ({ isAuth }) => {
     return (
         <nav className="light-blue">
             <div className="nav-wrapper">
-                <a href="#" className="brand-logo ml-15">
+                <Link to="" className="brand-logo ml-15">
                     Logo
-                </a>
+                </Link>
                 <ul id="nav-mobile" className="right hide-on-med-and-down">
                     <li>
-                        <a href="collapsible.html">{isAuth ? "Выйти" : "Войти"}</a>
+                        <Link to="/login">{isAuth ? "Выйти" : "Войти"}</Link>
                     </li>
                 </ul>
             </div>

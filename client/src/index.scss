@@ -1,5 +1,12 @@
 @import "~materialize-css/dist/css/materialize.min.css";
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+
 .mr-10 {
     margin-right: 10px;
 }

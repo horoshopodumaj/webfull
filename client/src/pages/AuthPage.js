@@ -7,11 +7,11 @@ const AuthPage = () => {
                 <h1>Таблица пользователей</h1>
                 <div className="card cyan lighten-5">
                     <div className="card-content black-text">
-                        <span className="card-title ">Авторизация</span>
+                        <span className="card-title ">Регистрация</span>
                         <div>
                             <div className="input-field">
-                                <input id="email" type="text" name="name" />
-                                <label htmlFor="email">Name</label>
+                                <input id="name" type="text" name="name" />
+                                <label htmlFor="name">Name</label>
                             </div>
                             <div className="input-field">
                                 <input id="email" type="text" name="email" />

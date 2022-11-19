@@ -2,6 +2,7 @@
     "name": "webfull",
     "version": "1.0.0",
     "description": "user table",
+    "proxy": "http://localhost:5000",
     "main": "app.js",
     "scripts": {
         "start": "node app.js",
