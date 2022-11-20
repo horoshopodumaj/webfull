@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import moment from "moment";
+import { AuthContext } from "../context/AuthContext";
 
 const AuthPage = () => {
     const [type, setType] = useState(true);
@@ -10,6 +11,8 @@ const AuthPage = () => {
         password: "",
         loginDate: "",
     });
+
+    const { login } = useContext(AuthContext);
 
     const changeHandler = (event) => {
         setForm({
@@ -31,7 +34,7 @@ const AuthPage = () => {
                         },
                     }
                 )
-                .then((response) => console.log(response));
+                .then((response) => login(response.data.token, response.data.userId));
         } catch (error) {
             console.log(error);
         }

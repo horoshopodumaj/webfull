@@ -94,7 +94,7 @@ const LoginPage = () => {
                                 className="btn yellow lighten-4 black-text mr-10">
                                 Зарегистрироваться
                             </button>
-                            <Link to="/" className="btn teal accent-2 black-text">
+                            <Link to="/login" className="btn teal accent-2 black-text">
                                 Уже есть аккаунт?
                             </Link>
                         </div>

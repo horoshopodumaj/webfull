@@ -5,15 +5,19 @@ import LoginPage from "./pages/LoginPage";
 import UsersPage from "./pages/UsersPage";
 
 export const UseRoutes = (isAuth) => {
+    if (isAuth) {
+        return (
+            <Routes>
+                <Route path="/" element={<UsersPage />} />
+                <Route path="*" element={<Navigate to="/" />} />
+            </Routes>
+        );
+    }
     return (
         <Routes>
-            <Route path="/" element={<AuthPage />} />
+            <Route path="/login" element={<AuthPage />} />
             <Route path="/registration" element={<LoginPage />} />
-            <Route path="/users" element={isAuth ? <UsersPage /> : <Navigate to="/" replace />} />
-            <Route
-                path="*"
-                element={isAuth ? <Navigate to="/users" /> : <Navigate to="/" replace />}
-            />
+            <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
     );
 };
