@@ -24,7 +24,7 @@ router.post(
                 });
             }
 
-            const { email, password, name, createDate, loginDate } = req.body;
+            const { email, password, name, createDate, loginDate, isBlocked } = req.body;
             const candidate = await User.findOne({ email });
 
             if (candidate) {
@@ -32,7 +32,14 @@ router.post(
             }
 
             const hashedPassword = await bcrypt.hash(password, 12);
-            const user = new User({ email, password: hashedPassword, name, createDate, loginDate });
+            const user = new User({
+                email,
+                password: hashedPassword,
+                name,
+                createDate,
+                loginDate,
+                isBlocked,
+            });
 
             await user.save();
 

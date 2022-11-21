@@ -33,3 +33,19 @@
 .icons {
     cursor: pointer;
 }
+
+.user {
+    position: relative;
+    &.blocked {
+        &::after {
+            content: "";
+            position: absolute;
+            top: 45%;
+            left: 50px;
+            width: 80%;
+            height: 2px;
+            background-color: red;
+            //right: 0;
+        }
+    }
+}

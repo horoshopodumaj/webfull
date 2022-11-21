@@ -21,4 +21,27 @@ router.delete("/delete/:id", async (req, res) => {
     }
 });
 
+router.put("/blocked/:id", async (req, res) => {
+    try {
+        const user = await Users.findOne({ _id: req.params.id });
+        user.isBlocked = true;
+
+        await user.save();
+        res.json(user);
+    } catch (error) {
+        res.status(500).json({ message: "User blocking failed" });
+    }
+});
+router.put("/unblocked/:id", async (req, res) => {
+    try {
+        const user = await Users.findOne({ _id: req.params.id });
+        user.isBlocked = false;
+
+        await user.save();
+        res.json(user);
+    } catch (error) {
+        res.status(500).json({ message: "User unblocking failed" });
+    }
+});
+
 module.exports = router;

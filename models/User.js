@@ -6,6 +6,7 @@ const schema = new Schema({
     name: { type: String, required: true },
     createDate: { type: Date },
     loginDate: { type: Date },
+    isBlocked: false,
 });
 
 module.exports = model("User", schema);

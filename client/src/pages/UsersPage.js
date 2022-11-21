@@ -9,6 +9,8 @@ const UsersPage = () => {
         userChecked.includes(userID)
             ? (userChecked = userChecked.filter((id) => id !== userID))
             : userChecked.push(userID);
+
+        console.log(userChecked);
     };
 
     const getUsers = useCallback(async () => {
@@ -46,6 +48,30 @@ const UsersPage = () => {
         [getUsers]
     );
 
+    const blockedUser = useCallback(
+        async (id) => {
+            try {
+                await axios
+                    .put(
+                        `/api/users/blocked/${id}`,
+                        { id },
+                        {
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                        }
+                    )
+                    .then((res) => {
+                        setUsersList([...usersList], res.data);
+                        getUsers();
+                    });
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        [usersList, getUsers]
+    );
+
     useEffect(() => {
         getUsers();
     }, [getUsers]);
@@ -72,7 +98,11 @@ const UsersPage = () => {
                     <th>Last visit</th>
                     <th>Status</th>
                     <th>
-                        <i className="material-icons orange-text icons">lock</i>
+                        <i
+                            className="material-icons orange-text icons"
+                            onClick={() => userChecked.forEach((id) => blockedUser(id))}>
+                            lock
+                        </i>
                     </th>
                     <th>
                         <i className="material-icons green-text icons">lock_open</i>
@@ -89,7 +119,7 @@ const UsersPage = () => {
             <tbody>
                 {usersList.map((user, index) => {
                     return (
-                        <tr key={user._id}>
+                        <tr key={user._id} className={`user ${user.isBlocked ? "blocked" : ""}`}>
                             <td>
                                 <label>
                                     <input
