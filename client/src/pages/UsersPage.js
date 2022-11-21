@@ -1,19 +1,13 @@
 import React, { useCallback, useEffect, useState } from "react";
-import axios from "axios";
 import moment from "moment";
+import { usersAPI } from "../hooks/api";
 
 const UsersPage = () => {
     const [usersList, setUsersList] = useState([]);
 
     const getUsers = useCallback(async () => {
         try {
-            await axios
-                .get("/api/users", {
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                })
-                .then((res) => setUsersList(res.data));
+            await usersAPI.getUsers().then((data) => setUsersList(data));
         } catch (error) {
             console.log(error);
         }
@@ -22,20 +16,10 @@ const UsersPage = () => {
     const isChecked = useCallback(
         async (id) => {
             try {
-                await axios
-                    .put(
-                        `/api/users/checked/${id}`,
-                        { id },
-                        {
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                        }
-                    )
-                    .then((res) => {
-                        setUsersList([...usersList], res.data);
-                        getUsers();
-                    });
+                await usersAPI.isChecked(id).then((data) => {
+                    setUsersList([...usersList], data);
+                    getUsers();
+                });
             } catch (error) {
                 console.log(error);
             }
@@ -46,17 +30,7 @@ const UsersPage = () => {
     const removeUser = useCallback(
         async (id) => {
             try {
-                await axios
-                    .delete(
-                        `/api/users/delete/${id}`,
-                        { id },
-                        {
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                        }
-                    )
-                    .then(() => getUsers());
+                await usersAPI.removeUser(id).then(() => getUsers());
             } catch (error) {
                 console.log(error);
             }
@@ -67,20 +41,9 @@ const UsersPage = () => {
     // const unChekedAll = useCallback(
     //     async (id) => {
     //         try {
-    //             await axios
-    //                 .put(
-    //                     `/api/users/uncheckedall/${id}`,
-    //                     { id },
-    //                     {
-    //                         headers: {
-    //                             "Content-Type": "application/json",
-    //                         },
-    //                     }
-    //                 )
-    //                 .then((res) => {
-    //                     setUsersList([...usersList], res.data);
-    //                     //getUsers();
-    //                 });
+    //             await usersAPI.unChekedAll(id).then((data) => {
+    //                 setUsersList([...usersList], data);
+    //             });
     //         } catch (error) {
     //             console.log(error);
     //         }
@@ -91,21 +54,10 @@ const UsersPage = () => {
     const blockedUser = useCallback(
         async (id) => {
             try {
-                await axios
-                    .put(
-                        `/api/users/blocked/${id}`,
-                        { id },
-                        {
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                        }
-                    )
-                    .then((res) => {
-                        setUsersList([...usersList], res.data);
-                        //unChekedAll(id);
-                        getUsers();
-                    });
+                await usersAPI.blockedUser(id).then((data) => {
+                    setUsersList([...usersList], data);
+                    getUsers();
+                });
             } catch (error) {
                 console.log(error);
             }
@@ -116,21 +68,10 @@ const UsersPage = () => {
     const unBlockedUser = useCallback(
         async (id) => {
             try {
-                await axios
-                    .put(
-                        `/api/users/unblocked/${id}`,
-                        { id },
-                        {
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                        }
-                    )
-                    .then((res) => {
-                        setUsersList([...usersList], res.data);
-                        //unChekedAll(id);
-                        getUsers();
-                    });
+                await usersAPI.unBlockedUser(id).then((data) => {
+                    setUsersList([...usersList], data);
+                    getUsers();
+                });
             } catch (error) {
                 console.log(error);
             }
