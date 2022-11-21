@@ -24,7 +24,7 @@ router.post(
                 });
             }
 
-            const { email, password, name, createDate, loginDate, isBlocked } = req.body;
+            const { email, password, name, createDate, loginDate, isBlocked, isChecked } = req.body;
             const candidate = await User.findOne({ email });
 
             if (candidate) {
@@ -39,6 +39,7 @@ router.post(
                 createDate,
                 loginDate,
                 isBlocked,
+                isChecked,
             });
 
             await user.save();

@@ -12,6 +12,7 @@ const LoginPage = () => {
         createDate: "",
         loginDate: "",
         isBlocked: false,
+        isChecked: false,
     });
 
     const changeHandler = (event) => {
@@ -21,6 +22,7 @@ const LoginPage = () => {
             createDate: moment().format("LLL"),
             loginDate: moment().format("LLL"),
             isBlocked: false,
+            isChecked: false,
         });
     };
 

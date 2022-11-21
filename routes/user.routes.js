@@ -32,6 +32,7 @@ router.put("/blocked/:id", async (req, res) => {
         res.status(500).json({ message: "User blocking failed" });
     }
 });
+
 router.put("/unblocked/:id", async (req, res) => {
     try {
         const user = await Users.findOne({ _id: req.params.id });
@@ -41,6 +42,29 @@ router.put("/unblocked/:id", async (req, res) => {
         res.json(user);
     } catch (error) {
         res.status(500).json({ message: "User unblocking failed" });
+    }
+});
+
+router.put("/checked/:id", async (req, res) => {
+    try {
+        const user = await Users.findOne({ _id: req.params.id });
+        user.isChecked = !user.isChecked;
+
+        await user.save();
+        res.json(user);
+    } catch (error) {
+        res.status(500).json({ message: "User checked/unchecked failed" });
+    }
+});
+
+router.put("/uncheckedall/:id", async (req, res) => {
+    try {
+        const user = await Users.findOne({ _id: req.params.id });
+        user.isChecked = false;
+        await user.save();
+        res.json(user);
+    } catch (error) {
+        res.status(500).json({ message: "User checked/unchecked failed" });
     }
 });
 
