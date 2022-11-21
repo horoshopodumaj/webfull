@@ -72,14 +72,14 @@ const UsersPage = () => {
                     <th>Last visit</th>
                     <th>Status</th>
                     <th>
-                        <i className="material-icons orange-text">lock</i>
+                        <i className="material-icons orange-text icons">lock</i>
                     </th>
                     <th>
-                        <i className="material-icons green-text">lock_open</i>
+                        <i className="material-icons green-text icons">lock_open</i>
                     </th>
                     <th>
                         <i
-                            className="material-icons red-text"
+                            className="material-icons red-text icons"
                             onClick={() => userChecked.forEach((id) => removeUser(id))}>
                             delete
                         </i>
