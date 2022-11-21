@@ -41,6 +41,7 @@ const UsersPage = () => {
                         }
                     )
                     .then(() => getUsers());
+                userChecked = [];
             } catch (error) {
                 console.log(error);
             }
@@ -64,6 +65,32 @@ const UsersPage = () => {
                     .then((res) => {
                         setUsersList([...usersList], res.data);
                         getUsers();
+                        userChecked = [];
+                    });
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        [usersList, getUsers]
+    );
+
+    const unBlockedUser = useCallback(
+        async (id) => {
+            try {
+                await axios
+                    .put(
+                        `/api/users/unblocked/${id}`,
+                        { id },
+                        {
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                        }
+                    )
+                    .then((res) => {
+                        setUsersList([...usersList], res.data);
+                        getUsers();
+                        userChecked = [];
                     });
             } catch (error) {
                 console.log(error);
@@ -105,7 +132,11 @@ const UsersPage = () => {
                         </i>
                     </th>
                     <th>
-                        <i className="material-icons green-text icons">lock_open</i>
+                        <i
+                            className="material-icons green-text icons"
+                            onClick={() => userChecked.forEach((id) => unBlockedUser(id))}>
+                            lock_open
+                        </i>
                     </th>
                     <th>
                         <i
