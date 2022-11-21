@@ -3,8 +3,10 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { AuthContext } from "../context/AuthContext";
+import { useMessage } from "../hooks/message.hook";
 
 const AuthPage = () => {
+    const message = useMessage();
     const [type, setType] = useState(true);
     const [form, setForm] = useState({
         email: "",
@@ -36,7 +38,7 @@ const AuthPage = () => {
                 )
                 .then((response) => login(response.data.token, response.data.userId));
         } catch (error) {
-            console.log(error);
+            message(error.response.data.message);
         }
     };
 

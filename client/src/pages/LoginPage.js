@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import moment from "moment";
+import { AuthContext } from "../context/AuthContext";
+import { useMessage } from "../hooks/message.hook";
 
 const LoginPage = () => {
+    const message = useMessage();
     const [type, setType] = useState(true);
     const [form, setForm] = useState({
         email: "",
@@ -14,6 +16,8 @@ const LoginPage = () => {
         isBlocked: false,
         isChecked: false,
     });
+
+    const { login } = useContext(AuthContext);
 
     const changeHandler = (event) => {
         setForm({
@@ -38,9 +42,27 @@ const LoginPage = () => {
                         },
                     }
                 )
-                .then((response) => console.log(response));
+                .then((response) => message(response.data.message));
         } catch (error) {
-            console.log(error);
+            message(error.response.data.message);
+        }
+    };
+
+    const loginHandler = async () => {
+        try {
+            await axios
+                .post(
+                    "/api/auth/login",
+                    { ...form },
+                    {
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                    }
+                )
+                .then((response) => login(response.data.token, response.data.userId));
+        } catch (error) {
+            message(error.response.data.message);
         }
     };
 
@@ -98,9 +120,9 @@ const LoginPage = () => {
                                 className="btn yellow lighten-4 black-text mr-10">
                                 Зарегистрироваться
                             </button>
-                            <Link to="/login" className="btn teal accent-2 black-text">
-                                Уже есть аккаунт?
-                            </Link>
+                            <button onClick={loginHandler} className="btn teal accent-2 black-text">
+                                Войти
+                            </button>
                         </div>
                     </form>
                 </div>
