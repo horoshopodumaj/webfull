@@ -49,3 +49,13 @@
         }
     }
 }
+
+.username {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+
+    p {
+        padding: 10px;
+    }
+}
