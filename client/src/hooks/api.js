@@ -23,9 +23,9 @@ export const usersAPI = {
     unBlockedUser(id) {
         return instance.put(`/api/users/unblocked/${id}`, { id }).then((response) => response.data);
     },
-    unChekedAll(id) {
+    unChekedAll(checked) {
         return instance
-            .put(`/api/users/uncheckedall/${id}`, { id })
+            .put(`/api/users/uncheckedall/${checked}`, { checked })
             .then((response) => response.data);
     },
 };

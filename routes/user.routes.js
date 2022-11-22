@@ -57,11 +57,9 @@ router.put("/checked/:id", async (req, res) => {
     }
 });
 
-router.put("/uncheckedall/:id", async (req, res) => {
+router.put("/uncheckedall/:checked", async (req, res) => {
     try {
-        const user = await Users.findOne({ _id: req.params.id });
-        user.isChecked = false;
-        await user.save();
+        const user = await Users.updateMany({}, { isChecked: Boolean(+req.params.checked) });
         res.json(user);
     } catch (error) {
         res.status(500).json({ message: "User checked/unchecked failed" });

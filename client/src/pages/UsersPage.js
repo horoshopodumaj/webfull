@@ -4,6 +4,7 @@ import { usersAPI } from "../hooks/api";
 
 const UsersPage = () => {
     const [usersList, setUsersList] = useState([]);
+    const [checked, setChecked] = useState(false);
 
     const getUsers = useCallback(async () => {
         try {
@@ -39,15 +40,25 @@ const UsersPage = () => {
         [getUsers]
     );
 
-    // const unChekedAll = useCallback(async (id) => {
-    //     try {
-    //         await usersAPI.unChekedAll(id).then(() => {
-    //             getUsers();
-    //         });
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }, []);
+    const unChekedAll = useCallback(
+        async (checked) => {
+            try {
+                setChecked(!checked);
+                if (checked) {
+                    await usersAPI.unChekedAll(0).then(() => {
+                        getUsers();
+                    });
+                } else {
+                    await usersAPI.unChekedAll(1).then(() => {
+                        getUsers();
+                    });
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        [getUsers]
+    );
 
     const blockedUser = useCallback(
         async (id) => {
@@ -86,9 +97,10 @@ const UsersPage = () => {
                     <th>
                         <label>
                             <input
+                                checked={checked}
                                 name="list"
                                 type="checkbox"
-                                onClick={() => usersList.forEach((user) => isChecked(user._id))}
+                                onClick={() => unChekedAll(checked)}
                             />
                             <span></span>
                         </label>
