@@ -16,21 +16,9 @@ const UsersPage = () => {
     const isChecked = useCallback(
         async (id) => {
             try {
-                await usersAPI.isChecked(id).then((data) => {
-                    setUsersList([...usersList], data);
+                await usersAPI.isChecked(id).then(() => {
                     getUsers();
                 });
-            } catch (error) {
-                console.log(error);
-            }
-        },
-        [usersList, getUsers]
-    );
-
-    const removeUser = useCallback(
-        async (id) => {
-            try {
-                await usersAPI.removeUser(id).then(() => getUsers());
             } catch (error) {
                 console.log(error);
             }
@@ -38,45 +26,53 @@ const UsersPage = () => {
         [getUsers]
     );
 
-    // const unChekedAll = useCallback(
-    //     async (id) => {
-    //         try {
-    //             await usersAPI.unChekedAll(id).then((data) => {
-    //                 setUsersList([...usersList], data);
-    //             });
-    //         } catch (error) {
-    //             console.log(error);
-    //         }
-    //     },
-    //     [usersList]
-    // );
-
-    const blockedUser = useCallback(
+    const removeUser = useCallback(
         async (id) => {
             try {
-                await usersAPI.blockedUser(id).then((data) => {
-                    setUsersList([...usersList], data);
+                await usersAPI.removeUser(id).then(() => {
                     getUsers();
                 });
             } catch (error) {
                 console.log(error);
             }
         },
-        [usersList, getUsers]
+        [getUsers]
+    );
+
+    // const unChekedAll = useCallback(async (id) => {
+    //     try {
+    //         await usersAPI.unChekedAll(id).then(() => {
+    //             getUsers();
+    //         });
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }, []);
+
+    const blockedUser = useCallback(
+        async (id) => {
+            try {
+                await usersAPI.blockedUser(id).then(() => {
+                    isChecked(id);
+                });
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        [isChecked]
     );
 
     const unBlockedUser = useCallback(
         async (id) => {
             try {
-                await usersAPI.unBlockedUser(id).then((data) => {
-                    setUsersList([...usersList], data);
-                    getUsers();
+                await usersAPI.unBlockedUser(id).then(() => {
+                    isChecked(id);
                 });
             } catch (error) {
                 console.log(error);
             }
         },
-        [usersList, getUsers]
+        [isChecked]
     );
 
     useEffect(() => {
