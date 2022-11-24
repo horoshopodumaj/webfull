@@ -24,7 +24,8 @@ router.post(
                 });
             }
 
-            const { email, password, name, createDate, loginDate, isBlocked, isChecked } = req.body;
+            const { email, password, name, createDate, loginDate, isBlocked, isChecked, isLogin } =
+                req.body;
             const candidate = await User.findOne({ email });
 
             if (candidate) {
@@ -42,6 +43,7 @@ router.post(
                 loginDate,
                 isBlocked,
                 isChecked,
+                isLogin,
             });
 
             await user.save();
@@ -71,7 +73,7 @@ router.post(
                 });
             }
 
-            const { email, password, loginDate } = req.body;
+            const { email, password, loginDate, isLogin, isBlocked } = req.body;
 
             const user = await User.findOne({ email });
 
@@ -91,13 +93,36 @@ router.post(
                 expiresIn: "1h",
             });
 
-            await User.findOneAndUpdate({ email }, { loginDate });
+            await User.findOneAndUpdate({ email }, { loginDate, isLogin: true, isBlocked: false });
 
-            res.json({ token, userId: user.id });
+            res.json({ token, userId: user.id, isLogin: true });
         } catch (error) {
             res.status(500).json({ message: "Something went wrong, try again" });
         }
     }
 );
+// /api/auth/islogin
+router.put("/islogin/:id", async (req, res) => {
+    try {
+        //const { userId } = req.body;
+
+        const user = await User.findOne({ _id: req.params.id });
+
+        if (!user) {
+            return res.json({
+                message: "Пользователь не найден, зарегистрируйтесь",
+                isLogin: false,
+            });
+        }
+
+        if (!user.isLogin) {
+            return res.json({ message: "Войти в систему снова", isLogin: user.isLogin });
+        }
+
+        res.json({ isLogin: user.isLogin });
+    } catch (error) {
+        res.status(500).json({ message: "Something went wrong, try again" });
+    }
+});
 
 module.exports = router;

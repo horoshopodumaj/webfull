@@ -36,7 +36,10 @@ const AuthPage = () => {
                         },
                     }
                 )
-                .then((response) => login(response.data.token, response.data.userId));
+                .then((response) =>
+                    login(response.data.token, response.data.userId, response.data.isLogin)
+                );
+            //login(response.data.token, response.data.userId)
         } catch (error) {
             message(error.response.data.message);
         }

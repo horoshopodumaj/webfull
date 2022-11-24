@@ -4,7 +4,7 @@ import { usersAPI } from "../hooks/api";
 import { AuthContext } from "../context/AuthContext";
 
 const UsersPage = () => {
-    const { userId } = useContext(AuthContext);
+    const { id } = useContext(AuthContext);
 
     const [usersList, setUsersList] = useState([]);
     const [checked, setChecked] = useState(false);
@@ -96,8 +96,8 @@ const UsersPage = () => {
     return (
         <>
             <div className="username">
-                <i className="material-icons">account_circle</i>
-                <p>{usersList.map((user) => (user._id === userId ? user.email : ""))}</p>
+                <i className="material-icons blue-text">account_circle</i>
+                <p>{usersList.map((user) => (user._id === id ? user.email : ""))}</p>
             </div>
             <table className="highlight">
                 <thead>
@@ -108,7 +108,7 @@ const UsersPage = () => {
                                     checked={checked}
                                     name="list"
                                     type="checkbox"
-                                    onClick={() => unChekedAll(checked)}
+                                    onChange={() => unChekedAll(checked)}
                                 />
                                 <span></span>
                             </label>

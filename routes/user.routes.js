@@ -25,6 +25,7 @@ router.put("/blocked/:id", async (req, res) => {
     try {
         const user = await Users.findOne({ _id: req.params.id });
         user.isBlocked = true;
+        user.isLogin = false;
 
         await user.save();
         res.json(user);
