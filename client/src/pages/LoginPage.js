@@ -60,9 +60,7 @@ const LoginPage = () => {
                         },
                     }
                 )
-                .then((response) =>
-                    login(response.data.token, response.data.userId, response.data.isLogin)
-                );
+                .then((response) => login(response.data.token, response.data.userId));
         } catch (error) {
             message(error.response.data.message);
         }

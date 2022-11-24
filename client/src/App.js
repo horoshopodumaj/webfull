@@ -10,8 +10,8 @@ import { useMessage } from "../src/hooks/message.hook";
 
 function App() {
     const message = useMessage();
-    const { login, logout, token, id, isReady, isLoginRes } = useAuth();
-    const [isLogin, setIsLogin] = useState(isLoginRes);
+    const { login, logout, token, id, isReady } = useAuth();
+    const [isLogin, setIsLogin] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
