@@ -6,12 +6,12 @@ import { AuthContext } from "../context/AuthContext";
 const UsersPage = () => {
     const { id } = useContext(AuthContext);
 
-    const [usersList, setUsersList] = useState([]);
+    const [users, setUsers] = useState([]);
     const [checked, setChecked] = useState(false);
 
     const getUsers = useCallback(async () => {
         try {
-            await usersAPI.getUsers().then((data) => setUsersList(data));
+            await usersAPI.getUsers().then((data) => setUsers(data));
         } catch (error) {
             console.log(error);
         }
@@ -97,7 +97,7 @@ const UsersPage = () => {
         <>
             <div className="username">
                 <i className="material-icons blue-text">account_circle</i>
-                <p>{usersList.map((user) => (user._id === id ? user.email : ""))}</p>
+                <p>{users.map((user) => (user._id === id ? user.email : ""))}</p>
             </div>
             <table className="highlight">
                 <thead>
@@ -114,6 +114,7 @@ const UsersPage = () => {
                             </label>
                         </th>
                         <th>№</th>
+                        {/* <th>ID</th> */}
                         <th>Name</th>
                         <th>Email</th>
                         <th>Registration</th>
@@ -123,7 +124,7 @@ const UsersPage = () => {
                             <i
                                 className="material-icons orange-text icons"
                                 onClick={() =>
-                                    usersList.forEach((user) =>
+                                    users.forEach((user) =>
                                         user.isChecked ? blockedUser(user._id) : ""
                                     )
                                 }>
@@ -134,7 +135,7 @@ const UsersPage = () => {
                             <i
                                 className="material-icons green-text icons"
                                 onClick={() =>
-                                    usersList.forEach((user) =>
+                                    users.forEach((user) =>
                                         user.isChecked ? unBlockedUser(user._id) : ""
                                     )
                                 }>
@@ -145,7 +146,7 @@ const UsersPage = () => {
                             <i
                                 className="material-icons red-text icons"
                                 onClick={() =>
-                                    usersList.forEach((user) =>
+                                    users.forEach((user) =>
                                         user.isChecked ? removeUser(user._id) : ""
                                     )
                                 }>
@@ -155,7 +156,7 @@ const UsersPage = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {usersList.map((user, index) => {
+                    {users.map((user, index) => {
                         return (
                             <tr
                                 key={user._id}
@@ -173,6 +174,7 @@ const UsersPage = () => {
                                     </label>
                                 </td>
                                 <td>{index + 1}</td>
+                                {/* <td>{user._id}</td> */}
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>{moment(user.createDate).format("LLL")}</td>
