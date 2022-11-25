@@ -194,7 +194,6 @@ const UsersPage = () => {
                                 <td
                                     className="tooltip-style"
                                     data-toggle="tooltip"
-                                    data-placement="top"
                                     title={user._id}>
                                     {index + 1}
                                 </td>
