@@ -132,7 +132,7 @@ const UsersPage = () => {
                             </label>
                         </th>
                         <th>№</th>
-                        <th>ID</th>
+                        {/* <th>ID</th> */}
                         <th>Name</th>
                         <th>Email</th>
                         <th>Registration</th>
@@ -191,8 +191,15 @@ const UsersPage = () => {
                                         <span></span>
                                     </label>
                                 </td>
-                                <td>{index + 1}</td>
-                                <td>{user._id}</td>
+                                <td
+                                    className="tooltip-style"
+                                    data-toggle="tooltip"
+                                    data-placement="top"
+                                    title={user._id}>
+                                    {index + 1}
+                                </td>
+
+                                {/* <td>{user._id}</td> */}
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>{moment(user.createDate).format("LLL")}</td>
