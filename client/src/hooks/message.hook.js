@@ -5,5 +5,5 @@ export const useMessage = () => {
         if (window.M && text) {
             window.M.toast({ html: text });
         }
-    });
+    }, []);
 };
