@@ -2,20 +2,38 @@ import React, { useCallback, useContext, useEffect, useState } from "react";
 import moment from "moment";
 import { usersAPI } from "../hooks/api";
 import { AuthContext } from "../context/AuthContext";
+import axios from "axios";
 
 const UsersPage = () => {
-    const { id } = useContext(AuthContext);
-
+    const { id, updateIsLogin } = useContext(AuthContext);
     const [users, setUsers] = useState([]);
     const [checked, setChecked] = useState(false);
 
+    const userIsLogin = useCallback(async () => {
+        try {
+            const res = await axios.put(
+                `/api/auth/islogin/${id}`,
+                { id },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+            updateIsLogin(res.data.isLogin);
+        } catch (error) {
+            console.log(error.response);
+        }
+    }, [id, updateIsLogin]);
+
     const getUsers = useCallback(async () => {
+        userIsLogin(id);
         try {
             await usersAPI.getUsers().then((data) => setUsers(data));
         } catch (error) {
             console.log(error);
         }
-    }, []);
+    }, [userIsLogin, id]);
 
     const isChecked = useCallback(
         async (id) => {
@@ -114,7 +132,7 @@ const UsersPage = () => {
                             </label>
                         </th>
                         <th>№</th>
-                        {/* <th>ID</th> */}
+                        <th>ID</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Registration</th>
@@ -174,7 +192,7 @@ const UsersPage = () => {
                                     </label>
                                 </td>
                                 <td>{index + 1}</td>
-                                {/* <td>{user._id}</td> */}
+                                <td>{user._id}</td>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>{moment(user.createDate).format("LLL")}</td>

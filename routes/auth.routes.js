@@ -104,11 +104,10 @@ router.post(
 // /api/auth/islogin
 router.put("/islogin/:id", async (req, res) => {
     try {
-        //const { userId } = req.body;
-
         const user = await User.findOne({ _id: req.params.id });
 
         if (!user) {
+            await User.updateMany({}, { isChecked: false });
             return res.json({
                 message: "Пользователь не найден, зарегистрируйтесь",
                 isLogin: false,
@@ -116,7 +115,8 @@ router.put("/islogin/:id", async (req, res) => {
         }
 
         if (!user.isLogin) {
-            return res.json({ message: "Войти в систему снова", isLogin: user.isLogin });
+            await User.updateMany({}, { isChecked: false });
+            return res.json({ message: "Войдите в систему снова", isLogin: user.isLogin });
         }
 
         res.json({ isLogin: user.isLogin });

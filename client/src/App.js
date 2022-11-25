@@ -10,7 +10,7 @@ import { useMessage } from "../src/hooks/message.hook";
 
 function App() {
     const message = useMessage();
-    const { login, logout, token, id, isReady } = useAuth();
+    const { login, logout, token, id } = useAuth();
     const [isLogin, setIsLogin] = useState(true);
 
     useEffect(() => {
@@ -27,6 +27,7 @@ function App() {
                 );
                 setIsLogin(res.data.isLogin);
                 message(res.data.message);
+                console.log(res);
             } catch (error) {
                 console.log(error.response);
             }
@@ -34,11 +35,15 @@ function App() {
         fetchData();
     }, [id, isLogin, login, message]);
 
+    const updateIsLogin = (isLoginUserPage) => {
+        setIsLogin(isLoginUserPage);
+    };
+
     const isAuth = isLogin && !!token;
-    const routes = UseRoutes(isAuth);
+    const routes = UseRoutes(isAuth, updateIsLogin);
 
     return (
-        <AuthContext.Provider value={{ login, logout, token, id, isReady, isAuth }}>
+        <AuthContext.Provider value={{ login, logout, token, id, isAuth, updateIsLogin }}>
             <BrowserRouter>
                 <Header />
                 <div className="container">{routes}</div>
