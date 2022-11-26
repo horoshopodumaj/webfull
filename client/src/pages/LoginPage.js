@@ -3,6 +3,7 @@ import axios from "axios";
 import moment from "moment";
 import { AuthContext } from "../context/AuthContext";
 import { useMessage } from "../hooks/message.hook";
+import { URL } from "../App";
 
 const LoginPage = () => {
     const message = useMessage();
@@ -34,7 +35,7 @@ const LoginPage = () => {
         try {
             await axios
                 .post(
-                    "/api/auth/register",
+                    `${URL}/api/auth/register`,
                     { ...form },
                     {
                         headers: {
@@ -52,7 +53,7 @@ const LoginPage = () => {
         try {
             await axios
                 .post(
-                    "/api/auth/login",
+                    `${URL}/api/auth/login`,
                     { ...form },
                     {
                         headers: {

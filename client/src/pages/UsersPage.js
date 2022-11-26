@@ -3,6 +3,7 @@ import moment from "moment";
 import { usersAPI } from "../hooks/api";
 import { AuthContext } from "../context/AuthContext";
 import axios from "axios";
+import { URL } from "../App";
 
 const UsersPage = () => {
     const { id, updateIsLogin } = useContext(AuthContext);
@@ -12,7 +13,7 @@ const UsersPage = () => {
     const userIsLogin = useCallback(async () => {
         try {
             const res = await axios.put(
-                `/api/auth/islogin/${id}`,
+                `${URL}/api/auth/islogin/${id}`,
                 { id },
                 {
                     headers: {
@@ -132,7 +133,7 @@ const UsersPage = () => {
                             </label>
                         </th>
                         <th>№</th>
-                        {/* <th>ID</th> */}
+                        <th>ID</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Registration</th>
@@ -191,14 +192,9 @@ const UsersPage = () => {
                                         <span></span>
                                     </label>
                                 </td>
-                                <td
-                                    className="tooltip-style"
-                                    data-toggle="tooltip"
-                                    title={user._id}>
-                                    {index + 1}
-                                </td>
+                                <td>{index + 1}</td>
 
-                                {/* <td>{user._id}</td> */}
+                                <td>{user._id}</td>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>{moment(user.createDate).format("LLL")}</td>

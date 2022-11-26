@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 import { AuthContext } from "../context/AuthContext";
 import { useMessage } from "../hooks/message.hook";
+import { URL } from "../App";
 
 const AuthPage = () => {
     const message = useMessage();
@@ -28,7 +29,7 @@ const AuthPage = () => {
         try {
             await axios
                 .post(
-                    "/api/auth/login",
+                    `${URL}/api/auth/login`,
                     { ...form },
                     {
                         headers: {

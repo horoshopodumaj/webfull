@@ -8,6 +8,8 @@ import { useAuth } from "./hooks/auth.hook";
 import { useEffect, useState } from "react";
 import { useMessage } from "../src/hooks/message.hook";
 
+export const URL = process.env.REACT_APP_SERVER_URL;
+
 function App() {
     const message = useMessage();
     const { login, logout, token, id } = useAuth();
