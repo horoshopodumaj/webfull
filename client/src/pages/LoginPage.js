@@ -1,9 +1,8 @@
 import React, { useContext, useState } from "react";
-import axios from "axios";
 import moment from "moment";
 import { AuthContext } from "../context/AuthContext";
 import { useMessage } from "../hooks/message.hook";
-import { URL } from "../App";
+import { usersAPI } from "../api/api";
 
 const LoginPage = () => {
     const message = useMessage();
@@ -24,8 +23,8 @@ const LoginPage = () => {
         setForm({
             ...form,
             [event.target.name]: event.target.value,
-            createDate: moment().format("LLL"),
-            loginDate: moment().format("LLL"),
+            createDate: moment().format("lll"),
+            loginDate: moment().format("lll"),
             isBlocked: false,
             isChecked: false,
         });
@@ -33,17 +32,9 @@ const LoginPage = () => {
 
     const registerHandler = async () => {
         try {
-            await axios
-                .post(
-                    `${URL}/api/auth/register`,
-                    { ...form },
-                    {
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                    }
-                )
-                .then((response) => message(response.data.message));
+            await usersAPI.register(form).then((data) => {
+                message(data.message);
+            });
         } catch (error) {
             message(error.response.data.message);
         }
@@ -51,17 +42,9 @@ const LoginPage = () => {
 
     const loginHandler = async () => {
         try {
-            await axios
-                .post(
-                    `${URL}/api/auth/login`,
-                    { ...form },
-                    {
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                    }
-                )
-                .then((response) => login(response.data.token, response.data.userId));
+            await usersAPI.login(form).then((data) => {
+                login(data.token, data.userId);
+            });
         } catch (error) {
             message(error.response.data.message);
         }

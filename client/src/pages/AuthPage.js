@@ -1,10 +1,9 @@
 import React, { useState, useContext } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { AuthContext } from "../context/AuthContext";
 import { useMessage } from "../hooks/message.hook";
-import { URL } from "../App";
+import { usersAPI } from "../api/api";
 
 const AuthPage = () => {
     const message = useMessage();
@@ -21,23 +20,15 @@ const AuthPage = () => {
         setForm({
             ...form,
             [event.target.name]: event.target.value,
-            loginDate: moment().format("LLL"),
+            loginDate: moment().format("lll"),
         });
     };
 
     const loginHandler = async () => {
         try {
-            await axios
-                .post(
-                    `${URL}/api/auth/login`,
-                    { ...form },
-                    {
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                    }
-                )
-                .then((response) => login(response.data.token, response.data.userId));
+            await usersAPI.login(form).then((data) => {
+                login(data.token, data.userId);
+            });
         } catch (error) {
             message(error.response.data.message);
         }
