@@ -118,7 +118,7 @@ const UsersPage = () => {
                 <i className="material-icons blue-text">account_circle</i>
                 <p>{users.map((user) => (user._id === id ? user.email : ""))}</p>
             </div>
-            <table className="highlight">
+            <table className="highlight responsive-table">
                 <thead>
                     <tr>
                         <th>

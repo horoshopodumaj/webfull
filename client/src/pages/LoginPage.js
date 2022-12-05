@@ -56,7 +56,7 @@ const LoginPage = () => {
 
     return (
         <div className="row">
-            <div className="col s6 offset-s3">
+            <div className="col s12 m8 l6 offset-m2 offset-l3">
                 <h1 className="txt-cnt">Таблица пользователей</h1>
                 <div className="card cyan lighten-5">
                     <form onSubmit={preventDefault}>
@@ -101,10 +101,12 @@ const LoginPage = () => {
                         <div className="card-action">
                             <button
                                 onClick={registerHandler}
-                                className="btn yellow lighten-4 black-text mr-10">
+                                className="btn yellow lighten-4 black-text mr-10 button">
                                 Зарегистрироваться
                             </button>
-                            <button onClick={loginHandler} className="btn teal accent-2 black-text">
+                            <button
+                                onClick={loginHandler}
+                                className="btn teal accent-2 black-text button">
                                 Войти
                             </button>
                         </div>

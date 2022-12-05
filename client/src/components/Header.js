@@ -11,7 +11,7 @@ const Header = () => {
                     TaskF
                 </Link>
                 {isAuth ? (
-                    <ul id="nav-mobile" className="right hide-on-med-and-down">
+                    <ul id="nav-mobile" className="right">
                         <li>
                             <Link to="/login" onClick={logout}>
                                 Выйти
@@ -19,7 +19,7 @@ const Header = () => {
                         </li>
                     </ul>
                 ) : (
-                    <ul id="nav-mobile" className="right hide-on-med-and-down">
+                    <ul id="nav-mobile" className="right ">
                         <li>
                             <Link to="/login">Войти</Link>
                         </li>
