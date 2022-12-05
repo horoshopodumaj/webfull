@@ -13,6 +13,10 @@
 При регистрации должна быть возможность использовать любой пароль, даже из одного символа.
 Заблокированный пользователь не может войти, удаленный может заново зарегистрироваться.
 
+Два репозитория, используемых при деплое приложения:
+https://github.com/horoshopodumaj/mern-app-client
+
+https://github.com/horoshopodumaj/mern-app-backend
 ---
 
 ## Web application with user authentication and registration.
@@ -29,3 +33,8 @@ The user can delete or block himself — at the same time, he must be logged out
 If someone else blocks or deletes the user, then at any next action the user is redirected to the login page.
 When registering, it should be possible to use any password, even from a single character.
 The blocked user cannot log in, the deleted user can re-register.
+
+Two repositories used when the application is deployed:
+https://github.com/horoshopodumaj/mern-app-client
+
+https://github.com/horoshopodumaj/mern-app-backend
