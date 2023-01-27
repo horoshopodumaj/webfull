@@ -2,7 +2,6 @@ import { BrowserRouter } from "react-router-dom";
 import "materialize-css";
 import axios from "axios";
 import { UseRoutes } from "./routes";
-import Header from "./components/Header";
 import { AuthContext } from "./context/AuthContext";
 import { useAuth } from "./hooks/auth.hook";
 import { useEffect, useState } from "react";
@@ -46,10 +45,7 @@ function App() {
 
     return (
         <AuthContext.Provider value={{ login, logout, token, id, isAuth, updateIsLogin }}>
-            <BrowserRouter>
-                <Header />
-                <div className="container">{routes}</div>
-            </BrowserRouter>
+            <BrowserRouter>{routes}</BrowserRouter>
         </AuthContext.Provider>
     );
 }
