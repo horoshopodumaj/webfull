@@ -48,9 +48,6 @@ const AuthPage = () => {
                     <div className="form__items">
                         <h1 className="form__text">Table with users</h1>
                         <div className="page__links">
-                            <Link to="/login" className="page__links-button">
-                                Login
-                            </Link>
                             <Link to="/registration" className="page__links-button">
                                 no account?
                             </Link>

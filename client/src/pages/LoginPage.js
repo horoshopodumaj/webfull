@@ -3,6 +3,7 @@ import moment from "moment";
 import { AuthContext } from "../context/AuthContext";
 import { useMessage } from "../hooks/message.hook";
 import { usersAPI } from "../api/api";
+import { Link } from "react-router-dom";
 
 const LoginPage = () => {
     const message = useMessage();
@@ -55,62 +56,83 @@ const LoginPage = () => {
     };
 
     return (
-        <div className="row">
-            <div className="col s12 m8 l6 offset-m2 offset-l3">
-                <h1 className="txt-cnt">Таблица пользователей</h1>
-                <div className="card cyan lighten-5">
-                    <form onSubmit={preventDefault}>
-                        <div className="card-content black-text">
-                            <span className="card-title ">Создать аккаунт</span>
-                            <div>
-                                <div className="input-field">
-                                    <input
-                                        onChange={changeHandler}
-                                        id="name"
-                                        type="text"
-                                        name="name"
-                                    />
-                                    <label htmlFor="name">Name</label>
-                                </div>
-                                <div className="input-field">
-                                    <input
-                                        onChange={changeHandler}
-                                        id="email"
-                                        type="email"
-                                        name="email"
-                                    />
-                                    <label htmlFor="email">Email</label>
-                                </div>
-                                <div className="input-field">
-                                    <input
-                                        onChange={changeHandler}
-                                        id="password"
-                                        type={type ? "password" : "text"}
-                                        name="password"
-                                        className="pass"
-                                    />
-                                    <label htmlFor="password">Password</label>
-                                    <i
-                                        onClick={() => setType(!type)}
-                                        className="icon material-icons">
-                                        {type ? "visibility" : "visibility_off"}
-                                    </i>
+        <div className="page__box">
+            <div className="image__box">
+                <div className="img__bg"></div>
+            </div>
+            <div className="form__box">
+                <div className="form__content">
+                    <div className="form__items">
+                        <h1 className="form__text">Table with users</h1>
+                        <div className="page__links">
+                            <Link to="/login" className="page__links-button">
+                                Login
+                            </Link>
+                        </div>
+                        <form onSubmit={preventDefault}>
+                            <div className="card-content black-text">
+                                <div>
+                                    <div>
+                                        <label htmlFor="name" className="form__label">
+                                            Name
+                                        </label>
+                                        <input
+                                            onChange={changeHandler}
+                                            id="name"
+                                            type="text"
+                                            name="name"
+                                            placeholder="Name"
+                                            className="form__input"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="email" className="form__label">
+                                            Email
+                                        </label>
+                                        <input
+                                            onChange={changeHandler}
+                                            id="email"
+                                            type="email"
+                                            name="email"
+                                            placeholder="Email"
+                                            className="form__input"
+                                        />
+                                    </div>
+                                    <div style={{ position: "relative" }}>
+                                        <label htmlFor="password" className="form__label">
+                                            Password
+                                        </label>
+                                        <input
+                                            onChange={changeHandler}
+                                            id="password"
+                                            type={type ? "password" : "text"}
+                                            name="password"
+                                            placeholder="Password"
+                                            className="form__input"
+                                        />
+
+                                        <i
+                                            onClick={() => setType(!type)}
+                                            className="icon material-icons">
+                                            {type ? "visibility" : "visibility_off"}
+                                        </i>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="card-action">
-                            <button
-                                onClick={registerHandler}
-                                className="btn yellow lighten-4 black-text mr-10 button">
-                                Зарегистрироваться
-                            </button>
-                            <button
-                                onClick={loginHandler}
-                                className="btn teal accent-2 black-text button">
-                                Войти
-                            </button>
-                        </div>
-                    </form>
+                            <div className="card-action">
+                                <button
+                                    onClick={registerHandler}
+                                    className="page__links-button form__button">
+                                    register
+                                </button>
+                                <button
+                                    onClick={loginHandler}
+                                    className="page__links-button form__button">
+                                    sign in
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
