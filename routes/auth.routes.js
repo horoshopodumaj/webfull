@@ -20,7 +20,7 @@ router.post(
             if (!errors.isEmpty()) {
                 return res.status(400).json({
                     errors: errors.array(),
-                    message: "Неверные данные при регистрации",
+                    message: "Incorrect data during registration",
                 });
             }
 
@@ -29,9 +29,7 @@ router.post(
             const candidate = await User.findOne({ email });
 
             if (candidate) {
-                return res
-                    .status(400)
-                    .json({ message: "Пользователь с таким email уже существует" });
+                return res.status(400).json({ message: "A user with this email already exists" });
             }
 
             const hashedPassword = await bcrypt.hash(password, 12);
@@ -48,7 +46,9 @@ router.post(
 
             await user.save();
 
-            res.status(201).json({ message: "Пользователь создан, нажмите кнопку 'Войти'" });
+            res.status(201).json({
+                message: "The user has been created, click the 'Sign in' button",
+            });
         } catch (error) {
             res.status(500).json({ message: "Something went wrong, try again" });
         }
@@ -69,7 +69,7 @@ router.post(
             if (!errors.isEmpty()) {
                 return res.status(400).json({
                     errors: errors.array(),
-                    message: "Неверные данные при входе в систему",
+                    message: "Invalid data when logging in",
                 });
             }
 
@@ -78,15 +78,13 @@ router.post(
             const user = await User.findOne({ email });
 
             if (!user) {
-                return res
-                    .status(400)
-                    .json({ message: "Пользователь не найден, зарегистрируйтесь" });
+                return res.status(400).json({ message: "The user is not found, register" });
             }
 
             const isMatch = await bcrypt.compare(password, user.password);
 
             if (!isMatch) {
-                return res.status(400).json({ message: "Неверный пароль, попробуйте еще раз" });
+                return res.status(400).json({ message: "Invalid password, try again" });
             }
 
             const token = jwt.sign({ userId: user.id }, config.get("jwtSecret"), {
@@ -109,14 +107,14 @@ router.put("/islogin/:id", async (req, res) => {
         if (!user) {
             await User.updateMany({}, { isChecked: false });
             return res.json({
-                message: "Пользователь не найден, зарегистрируйтесь",
+                message: "The user is not found, register",
                 isLogin: false,
             });
         }
 
         if (!user.isLogin) {
             await User.updateMany({}, { isChecked: false });
-            return res.json({ message: "Войдите в систему снова", isLogin: user.isLogin });
+            return res.json({ message: "Log in again", isLogin: user.isLogin });
         }
 
         res.json({ isLogin: user.isLogin });
